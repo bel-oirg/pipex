@@ -6,12 +6,12 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:58 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/03 05:25:40 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:17:28 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef H_PIPEX
-# define H_PIPEX
+#ifndef PIPEX_H
+# define PIPEX_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -21,7 +21,6 @@
 # define ERR_ARGS "[-] Invalid args\n"
 # define ERR_FILES "[-] Invalid files\n"
 # define ERR_MAL "[-] Error on malloc\n"
-# define PATH "/bin/"
 
 typedef struct s_data
 {
@@ -34,7 +33,6 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 	char			**flags;
 }	t_cmd;
-
 
 void	*my_malloc(size_t size, int mode);
 char	**ft_split(char *s, char c);

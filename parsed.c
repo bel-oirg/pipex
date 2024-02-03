@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:31 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/03 06:12:34 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:15:32 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		arr_len(char **splited)
 {
-	int index;
+	int	index;
 
 	if (!splited)
 		return (0);
