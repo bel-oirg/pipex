@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 22:16:11 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/01/30 02:29:03 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/03 05:58:36 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ size_t	ft_strlen(const char *s)
 
 static char	*ft_strdup(char *s1)
 {
-	char	*str;
 	size_t	len_s1;
 	int		index;
+	char	*str;
 
 	len_s1 = ft_strlen(s1);
 	str = my_malloc((len_s1 + 1) * (sizeof(char)), 1);

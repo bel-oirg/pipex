@@ -6,9 +6,12 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:58 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/01/30 02:24:25 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/03 05:25:40 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef H_PIPEX
+# define H_PIPEX
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -39,5 +42,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
 
 //parsed
-void	get_cmds(int argc, char *argv[], t_cmd	**cmd);
+void	get_cmds(int argc, char *argv[], char *envp[], t_cmd	**cmd);
 void	check_args(int argc, char *argv[]);
+
+#endif

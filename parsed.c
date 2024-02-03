@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:31 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/01/30 03:46:53 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/03 06:12:34 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,56 @@ void	check_args(int argc, char *argv[])
 	close(fd[1]);
 }
 
-void	get_cmds(int argc, char *argv[], t_cmd	**cmd)
+char	*my_strstr(char *str, char *to_find)
+{
+	int i;
+	int j;
+
+	i = 0;
+	if (to_find[0] == '\0')
+		return (str);
+	while (str[i] != '\0')
+	{
+		j = 0;
+		while (str[i + j] != '\0' && str[i + j] == to_find[j])
+		{
+			if (to_find[j + 1] == '\0')
+				return (&str[i + j + 1]);
+			++j;
+		}
+		++i;
+	}
+	return (0);
+}
+
+char	*add_path(char **envp, char *cmd)
+{
+	int	index;
+	char	*path;
+	char	*out;
+	char	**path_v;
+
+	index = -1;
+	while(envp[++index])
+	{
+		path = my_strstr(envp[index], "PATH=");
+		if (path)
+			break;
+	}
+	path_v = ft_split(path, ':');
+	index = -1;
+	while(path_v[++index])
+	{
+		out = ft_strjoin(path_v[index], "/");
+		out = ft_strjoin(out, cmd);
+		if (!access(out, X_OK))
+			return (out);
+	}
+	return (NULL);
+}
+
+
+void	get_cmds(int argc, char *argv[], char *envp[], t_cmd **cmd)
 {
 	int		micro_index;
 	char	**splited;
@@ -60,12 +109,10 @@ void	get_cmds(int argc, char *argv[], t_cmd	**cmd)
 		while(splited[++micro_index])
 		{
 			if (!micro_index)
-				(*cmd)->flags[micro_index] = ft_strjoin("/bin/", splited[micro_index]);
+				(*cmd)->flags[micro_index] = add_path(envp, splited[micro_index]);
 			else
 				(*cmd)->flags[micro_index] = splited[micro_index];
 		}
-		if (index == 2)
-			(*cmd)->flags[micro_index++] = argv[1];
 		(*cmd)->flags[micro_index] = NULL;
 		(*cmd)->next = NULL;
 		if (index < argc - 2)
