@@ -6,22 +6,13 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 01:49:39 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/03 17:15:05 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:30:35 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	gautama(char *cmd1[], int fd_in, int fd_out)
-{
-	dup2(fd_in, STDIN_FILENO);
-	dup2(fd_out, STDOUT_FILENO);
-	execve(cmd1[0], cmd1, NULL);
-	close(fd_out);
-	close(fd_in);
-}
-
-static void	buddha(t_cmd *cmd, int fd_in, int fd_out)
+static void	buddha(t_cmd *cmd)
 {
 	int	piped;
 	int	fd[2];
@@ -32,26 +23,34 @@ static void	buddha(t_cmd *cmd, int fd_in, int fd_out)
 	if (!forked)
 	{
 		close(fd[0]);
-		gautama(cmd->flags, fd_in, fd[1]);
+		dup2(fd[1], STDOUT_FILENO);
+		execve(cmd->flags[0], cmd->flags, NULL);
 	}
 	else
 	{
-		waitpid(forked, NULL, 0);
 		close(fd[1]);
-		gautama(cmd->next->flags, fd[0], fd_out);
+		dup2(fd[0], STDIN_FILENO);
+		waitpid(forked, NULL, 0);
 	}
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_cmd	*cmd;
+	int		index;
 	int		fd_in;
 	int		fd_out;
 
+	index = 2;
 	cmd = NULL;
 	check_args(argc, argv);
 	get_cmds(argc, argv, envp, &cmd);
-	fd_in = open(argv[1], O_RDONLY);
-	fd_out = open(argv[argc - 1], O_RDWR);
-	buddha(cmd, fd_in, fd_out);
+	fd_in = open(argv[1], O_RDONLY, 0777);
+	fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	dup2(fd_in, STDIN_FILENO);
+	while(++index  < argc - 1)
+		buddha(cmd),
+		cmd = cmd->next;
+	dup2(fd_out, STDOUT_FILENO);
+	execve(cmd->flags[0], cmd->flags, NULL);
 }

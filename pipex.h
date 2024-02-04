@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:58 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/03 17:17:28 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/04 16:12:46 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_cmd
 {
 	struct s_cmd	*next;
 	char			**flags;
+	int				fd_out;
+	int				fd_in;
 }	t_cmd;
 
 void	*my_malloc(size_t size, int mode);

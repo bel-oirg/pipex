@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:31 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/03 17:15:32 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:42:29 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,32 @@ char	*my_strstr(char *str, char *to_find)
 	int i;
 	int j;
 
-	i = 0;
-	if (to_find[0] == '\0')
+	i = -1;
+	if (!to_find[0])
 		return (str);
-	while (str[i] != '\0')
+	while (str[++i])
 	{
 		j = 0;
-		while (str[i + j] != '\0' && str[i + j] == to_find[j])
+		while (str[i + j] && str[i + j] == to_find[j])
 		{
-			if (to_find[j + 1] == '\0')
+			if (!to_find[j + 1])
 				return (&str[i + j + 1]);
 			++j;
 		}
-		++i;
 	}
 	return (0);
 }
 
+int	is_it_in(char *str, char c)
+{
+	while (str && *str)
+		if (*str++ == c)
+			return (1);
+	return (0);
+}
 char	*add_path(char **envp, char *cmd)
 {
-	int	index;
+	int		index;
 	char	*path;
 	char	*out;
 	char	**path_v;
@@ -79,6 +85,8 @@ char	*add_path(char **envp, char *cmd)
 	index = -1;
 	while(path_v[++index])
 	{
+		if (is_it_in(cmd, '/'))
+			return (cmd);
 		out = ft_strjoin(path_v[index], "/");
 		out = ft_strjoin(out, cmd);
 		if (!access(out, X_OK))
