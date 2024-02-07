@@ -5,21 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 01:37:13 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/07 21:57:44 by bel-oirg         ###   ########.fr       */
+/*   Created: 2023/12/05 17:21:53 by bel-oirg          #+#    #+#             */
+/*   Updated: 2024/02/07 23:05:28 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-size_t	ft_strlen(const char *s)
+static int	ft_strl(char *s)
 {
-	if (!*s)
-		return (0);
-	return (1 + ft_strlen(++s));
+	int	i;
+
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
 }
 
-static char	*ft_strdup(char *str, int len)
+static char	*ft_strd(char *str, int len)
 {
 	char	*array;
 	int		count;
@@ -36,7 +39,7 @@ static char	*ft_strdup(char *str, int len)
 	return (array);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	size_t	i;
 	int		len;
@@ -46,13 +49,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1 || !s2)
 	{
 		if (s1)
-			return (ft_strdup(s1, ft_strlen(s1)));
+			return (ft_strd(s1, ft_strl(s1)));
 		else if (s2)
-			return (ft_strdup(s2, ft_strlen(s2)));
+			return (ft_strd(s2, ft_strl(s2)));
 		else
 			return (NULL);
 	}
-	array = (char *)malloc(sizeof(char) * (ft_strlen(s2) + ft_strlen(s1) + 1));
+	array = (char *)malloc(sizeof(char) * (ft_strl(s2) + ft_strl(s1) + 1));
 	if (!array)
 		return (free_out(s1), NULL);
 	len = 0;
@@ -94,7 +97,7 @@ char	*print_line(char **temp)
 		n_pos++;
 	if (str[n_pos] == 10)
 		pipex++;
-	return_line = ft_strdup(str, n_pos);
-	*temp = ft_strdup(str + n_pos + pipex, ft_strlen(str + n_pos + pipex));
+	return_line = ft_strd(str, n_pos);
+	*temp = ft_strd(str + n_pos + pipex, ft_strl(str + n_pos + pipex));
 	return (free_out(str), return_line);
 }

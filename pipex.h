@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:58 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/07 22:33:29 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/07 23:00:49 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_cmd
 
 void	*my_malloc(size_t size, int mode);
 char	**ft_split(char *s, char c);
-// char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin(char *s1, char *s2);
 
 //parsed
 void	get_cmds(int argc, char *argv[], char *envp[], t_cmd **cmd);
@@ -54,12 +54,12 @@ int		my_strcmp(char *s1, char *s2);
 //parsed_utils
 int		is_it_in(char *str, char c);
 int		arr_len(char **splited);
+int		ft_strlen(char *str);
 char	*my_strstr(char *str, char *to_find);
 
 //next_line
-size_t	ft_strlen(const char *s);
 void	free_out(char *out_free);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 int		have_n(char	*temp);
 char	*print_line(char **temp);
 char	*get_next_line(int fd);

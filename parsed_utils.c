@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:07:11 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/05 17:10:06 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/07 22:57:38 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,11 @@ int	is_it_in(char *str, char c)
 		if (*str++ == c)
 			return (1);
 	return (0);
+}
+
+int	ft_strlen(char *str)
+{
+	if (!str || !*str)
+		return (0);
+	return (1 + ft_strlen(++str));
 }

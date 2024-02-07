@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/05 01:37:17 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/07 21:54:59 by bel-oirg         ###   ########.fr       */
+/*   Created: 2024/02/07 22:54:03 by bel-oirg          #+#    #+#             */
+/*   Updated: 2024/02/07 22:54:08 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_next_line(int fd)
 	{
 		readen = read(fd, buf, BUFFER_SIZE);
 		buf[readen] = 0;
-		out = ft_strjoin(out, buf);
+		out = ft_strjoin_gnl(out, buf);
 		if (have_n(out))
 			break ;
 	}

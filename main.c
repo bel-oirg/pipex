@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 01:49:39 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/07 22:40:24 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/07 23:05:59 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,12 @@ void	vinaya(int argc, char *argv[], t_cmd *cmd)
 	execve(cmd->flags[0], cmd->flags, NULL);
 }
 
-void	vinaya_h(int argc, char *argv[], t_cmd *cmd, char *EOF_V)
+void	vinaya_h(int argc, char *argv[], t_cmd *cmd)
 {
 	int		index;
 	int		fd_in;
 	int		fd_out;
 	char	*line;
-	(void) EOF_V;
 
 	index = 2;
 	fd_in = open("tmp_file", O_RDWR | O_APPEND | O_CREAT, 0777); //kaytzad 3la l file
@@ -82,7 +81,7 @@ void	vinaya_h(int argc, char *argv[], t_cmd *cmd, char *EOF_V)
 		line = get_next_line(0);
 		if (!my_strcmp(line, argv[2]))
 			break ;
-		write(fd_in, line, sizeof(line));
+		write(fd_in, line, ft_strlen(line));
 		free(line);
 	}
 	fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
@@ -109,5 +108,5 @@ int	main(int argc, char *argv[], char *envp[])
 	if (!EOF_V)
 		vinaya(argc, argv, cmd);
 	else
-		vinaya_h(argc, argv, cmd, EOF_V);
+		vinaya_h(argc, argv, cmd);
 }
