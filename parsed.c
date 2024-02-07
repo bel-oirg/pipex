@@ -6,25 +6,40 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:31 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/05 17:17:28 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/07 18:26:34 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	check_args(int argc, char *argv[])
+int my_strcmp(char *s1, char *s2)
+{
+	if (!s1 || !s2)
+		return (0);
+	while (*s1 == *s2 && *s1 && *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*s1 - *s2);
+}
+
+char	*check_args(int argc, char *argv[])
 {
 	int	fd[2];
 	int	index;
 
 	index = -1;
 	(argc < 5) && (perror(ERR_ARGS), exit(0), 0);
-	fd[0] = open(argv[1], O_RDONLY, 0777);
-	(fd[0] < 0) && (perror(ERR_FILES), exit(1), 0);
-	close(fd[0]);
 	fd[1] = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	(fd[1] < 0) && (perror(ERR_FILES), exit(1), 0);
 	close(fd[1]);
+	if (!my_strcmp(argv[1], "here_doc"))
+		return (argv[2]);
+	fd[0] = open(argv[1], O_RDONLY, 0777);
+	(fd[0] < 0) && (perror(ERR_FILES), exit(1), 0);
+	close(fd[0]);
+	return (NULL);
 }
 
 static char	*add_path(char **envp, char *cmd)
