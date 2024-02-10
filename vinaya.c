@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:54:32 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/10 18:39:06 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/11 00:48:16 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	buddha(t_cmd *cmd)
 
 void	err(int *fd_in, int *fd_out)
 {
-	close(*fd_in);
-	close(*fd_out);
+	(fd_in) && (close(*fd_in), 0);
+	(fd_out) && (close(*fd_out), 0);
 	my_malloc(0, 0);
 }
 
@@ -56,12 +56,15 @@ void	vinaya(int argc, char *argv[], t_cmd *cmd)
 	fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (dup2(fd_in, STDIN_FILENO) < 0)
 		(1) && (perror(ERR_DUP), err(&fd_in, &fd_out), 0);
+	close(fd_in);
 	while (++index < argc - 1)
 	{
-		(buddha(cmd)) && (err(&fd_in, &fd_out), 0);
+		(buddha(cmd)) && (err(NULL, &fd_out), 0);
 		cmd = cmd->next;
 	}
 	if (dup2(fd_out, STDOUT_FILENO) < 0)
-		(1) && (perror(ERR_DUP), err(&fd_in, &fd_out), 0);
+		(1) && (perror(ERR_DUP), err(NULL, &fd_out), 0);
+	close(fd_out);
 	execve(cmd->flags[0], cmd->flags, NULL);
+	(perror(ERR_EXEC), my_malloc(0, 0), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:31 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/11 00:06:49 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/11 00:52:11 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,19 @@ static char	*add_path(char **envp, char *cmd)
 	return (NULL);
 }
 
-void	fill_cmds(char **splited, char *envp[], t_cmd **cmd)
+static void	fill_cmds(char **splited, char *envp[], t_cmd **cmd)
 {
-	int	micro_index;
+	int	m_index;
 
-	micro_index = -1;
-	while (splited[++micro_index])
+	m_index = -1;
+	while (splited[++m_index])
 	{
-		if (!micro_index)
-			(*cmd)->flags[micro_index] = add_path(envp, splited[micro_index]);
+		if (!m_index)
+			(*cmd)->flags[m_index] = add_path(envp, splited[m_index]);
 		else
-			(*cmd)->flags[micro_index] = splited[micro_index];
+			(*cmd)->flags[m_index] = splited[m_index];
 	}
-	(*cmd)->flags[micro_index] = NULL;
+	(*cmd)->flags[m_index] = NULL;
 	(*cmd)->next = NULL;
 }
 
