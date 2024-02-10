@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:54:32 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/10 15:51:45 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:39:06 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@ int	buddha(t_cmd *cmd)
 	int	fd[2];
 	int	forked;
 
-	if (pipe(fd) < 0)
-		return (perror(ERR_PIPE), 1);
+	(pipe(fd) < 0) && (perror(ERR_PIPE), my_malloc(0, 0), 0);
 	forked = fork();
-	if (forked < 0)
-		return (close(fd[0]), close(fd[1]), perror(ERR_FORK), 1);
+	(forked < 0) && (close(fd[0]), close(fd[1]), perror(ERR_FORK), 0);
 	if (!forked)
 	{
 		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
+		if (dup2(fd[1], STDOUT_FILENO) < 0)
+			(perror(ERR_DUP), my_malloc(0, 0));
 		execve(cmd->flags[0], cmd->flags, NULL);
-		return (close(fd[0]), close(fd[1]), perror(ERR_EXEC), 1);
+		return (close(fd[1]), perror(ERR_EXEC), my_malloc(0, 0), 0);
 	}
 	else
 	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
 		wait(NULL);
+		close(fd[1]);
+		if (dup2(fd[0], STDIN_FILENO) < 0)
+			(perror(ERR_DUP), my_malloc(0, 0), 0);
 	}
 	return (0);
 }

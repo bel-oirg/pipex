@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 01:49:39 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/10 15:49:06 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/10 19:29:24 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ int	main(int argc, char *argv[], char *envp[])
 	cmd = NULL;
 	here_doc = check_args(argc, argv);
 	get_cmds(argc, argv, envp, &cmd);
-	if (!here_doc)
-		vinaya(argc, argv, cmd);
-	else
+	forked = fork();
+	(forked < 0) && (perror(ERR_FORK), my_malloc(0, 0));
+	if (!forked)
 	{
-		forked = fork();
-		(forked < 0) && (perror(ERR_FORK), my_malloc(0, 0));
-		if (!forked)
-			(1) && (vinaya_h(argc, argv, cmd->next), my_malloc(0, 0));
+		if (!here_doc)
+			vinaya(argc, argv, cmd);
 		else
-			(1) && (wait(NULL), unlink("tmp_f"), my_malloc(0, 0));
+			vinaya_h(argc, argv, cmd->next);
 	}
+	else
+		(wait(NULL), ((here_doc) && (unlink("tmp_f"))), my_malloc(0, 0));
 }
