@@ -6,7 +6,7 @@
 #    By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 02:32:08 by bel-oirg          #+#    #+#              #
-#    Updated: 2024/02/07 21:22:36 by bel-oirg         ###   ########.fr        #
+#    Updated: 2024/02/10 14:55:44 by bel-oirg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = pipex
 NAME_B = pipex_bonus
 
 SRCS = ft_split.c ft_strjoin.c my_malloc.c parsed.c \
-parsed_utils.c gnl.c gnl_utils.c
+parsed_utils.c gnl.c gnl_utils.c vinaya.c vinaya_h.c
 
 # SRCS_B = ft_strcmp.c get_next_line.c get_next_line_utils.c
 

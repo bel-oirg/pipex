@@ -6,107 +6,30 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 01:49:39 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/07 23:05:59 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:49:06 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static int	buddha(t_cmd *cmd)
-{
-	int	fd[2];
-	int	forked;
-
-	if (pipe(fd) < 0)
-		return (perror(ERR_PIPE), 1);
-	forked = fork();
-	if (forked < 0)
-		return (close(fd[0]), close(fd[1]), perror(ERR_FORK), 1);
-	if (!forked)
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		execve(cmd->flags[0], cmd->flags, NULL);
-		return (close(fd[0]), close(fd[1]), perror(ERR_EXEC), 1);
-	}
-	else
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		waitpid(forked, NULL, 0);
-	}
-	return (0);
-}
-
-void	err(int *fd_in, int *fd_out)
-{
-	close(*fd_in);
-	close(*fd_out);
-	my_malloc(0, 0);
-}
-
-void	vinaya(int argc, char *argv[], t_cmd *cmd)
-{
-	int		index;
-	int		fd_in;
-	int		fd_out;
-
-	index = 2;
-	fd_in = open(argv[1], O_RDONLY, 0777);
-	fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (dup2(fd_in, STDIN_FILENO) < 0)
-		(1) && (perror(ERR_DUP), err(&fd_in, &fd_out), 0);
-	while (++index < argc - 1)
-	{
-		(buddha(cmd)) && (err(&fd_in, &fd_out), 0);
-		cmd = cmd->next;
-	}
-	if (dup2(fd_out, STDOUT_FILENO) < 0)
-		(1) && (perror(ERR_DUP), err(&fd_in, &fd_out), 0);
-	execve(cmd->flags[0], cmd->flags, NULL);
-}
-
-void	vinaya_h(int argc, char *argv[], t_cmd *cmd)
-{
-	int		index;
-	int		fd_in;
-	int		fd_out;
-	char	*line;
-
-	index = 2;
-	fd_in = open("tmp_file", O_RDWR | O_APPEND | O_CREAT, 0777); //kaytzad 3la l file
-	while(1)
-	{
-		write(1, "heredoc >>", 11);
-		line = get_next_line(0);
-		if (!my_strcmp(line, argv[2]))
-			break ;
-		write(fd_in, line, ft_strlen(line));
-		free(line);
-	}
-	fd_out = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (dup2(fd_in, STDIN_FILENO) < 0)
-		(1) && (perror(ERR_DUP), err(&fd_in, &fd_out), 0);
-	while (++index < argc - 1)
-	{
-		(buddha(cmd)) && (err(&fd_in, &fd_out), 0);
-		cmd = cmd->next;
-	}
-	if (dup2(fd_out, STDOUT_FILENO) < 0)
-		(1) && (perror(ERR_DUP), err(&fd_in, &fd_out), 0);
-	execve(cmd->flags[0], cmd->flags, NULL);
-}
-
 int	main(int argc, char *argv[], char *envp[])
 {
+	int		here_doc;
+	int		forked;
 	t_cmd	*cmd;
-	char	*EOF_V;
-	
+
 	cmd = NULL;
-	EOF_V = check_args(argc, argv);
+	here_doc = check_args(argc, argv);
 	get_cmds(argc, argv, envp, &cmd);
-	if (!EOF_V)
+	if (!here_doc)
 		vinaya(argc, argv, cmd);
 	else
-		vinaya_h(argc, argv, cmd);
+	{
+		forked = fork();
+		(forked < 0) && (perror(ERR_FORK), my_malloc(0, 0));
+		if (!forked)
+			(1) && (vinaya_h(argc, argv, cmd->next), my_malloc(0, 0));
+		else
+			(1) && (wait(NULL), unlink("tmp_f"), my_malloc(0, 0));
+	}
 }

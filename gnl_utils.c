@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:21:53 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/07 23:05:28 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:49:32 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	have_n(char	*temp)
 char	*print_line(char **temp)
 {
 	int		n_pos;
-	int		pipex;
 	char	*return_line;
 	char	*str;
 
@@ -92,12 +91,11 @@ char	*print_line(char **temp)
 		return (NULL);
 	str = *temp;
 	n_pos = 0;
-	pipex = 0;
 	while (str[n_pos] && str[n_pos] != 10)
 		n_pos++;
 	if (str[n_pos] == 10)
-		pipex++;
+		n_pos++;
 	return_line = ft_strd(str, n_pos);
-	*temp = ft_strd(str + n_pos + pipex, ft_strl(str + n_pos + pipex));
+	*temp = ft_strd(str + n_pos, ft_strl(str + n_pos));
 	return (free_out(str), return_line);
 }
