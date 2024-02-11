@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:31 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/11 00:52:11 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:19:57 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ int	check_args(int argc, char *argv[])
 	int	index;
 
 	index = -1;
-	(argc < 5) && (perror(ERR_ARGS), exit(0), 0);
+	(argc < 5) && (perror(""), exit(0), 0);
 	fd[1] = open(argv[argc - 1], O_WRONLY | O_CREAT, 0777);
-	(fd[1] < 0) && (perror(ERR_FILES), exit(1), 0);
+	(fd[1] < 0) && (perror(""), exit(1), 0);
 	close(fd[1]);
 	if (!my_strcmp(argv[1], "here_doc"))
 	{
-		(argc > 6) && (perror(ERR_ARGS), my_malloc(0, 0), 0);
+		(argc > 6) && (perror(""), my_malloc(0, 0), 0);
 		return (1);
 	}
 	fd[0] = open(argv[1], O_RDONLY, 0777);
-	(fd[0] < 0) && (perror(ERR_FILES), exit(1), 0);
+	(fd[0] < 0) && (perror(""), exit(1), 0);
 	close(fd[0]);
 	return (0);
 }
@@ -65,6 +65,7 @@ static char	*add_path(char **envp, char *cmd)
 		if (path)
 			break ;
 	}
+	(!path) && (perror(""), my_malloc(0, 0));
 	path_v = ft_split(path, ':');
 	index = -1;
 	while (path_v[++index])
