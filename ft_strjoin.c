@@ -6,13 +6,13 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 22:16:11 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/07 22:55:23 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/13 22:38:57 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	*ft_strdup(char *s1)
+char	*ft_strdup(char *s1)
 {
 	size_t	len_s1;
 	int		index;

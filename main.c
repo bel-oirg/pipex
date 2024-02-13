@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 22:06:51 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/11 23:14:20 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/13 22:20:11 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,9 @@ void	c_args(int argc, char *argv[])
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	int		pid;
 	t_cmd	*cmd;
 
 	(1) && (cmd = NULL), (c_args(argc, argv));
 	get_cmds(argc, argv, envp, &cmd);
-	pid = fork();
-	(pid < 0) && (perror(""), my_malloc(0, 0));
-	(!pid) && (vinaya(argc, argv, cmd), 0);
-	(pid) && (wait(NULL), my_malloc(0, 0));
+	vinaya(argc, argv, cmd);
 }

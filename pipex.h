@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 22:17:04 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/11 22:46:25 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/13 22:43:10 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	*my_malloc(size_t size, int mode);
 char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
 
+char	*ft_strdup(char *s1);
 //parsed
 void	get_cmds(int argc, char *argv[], char *envp[], t_cmd **cmd);
 
