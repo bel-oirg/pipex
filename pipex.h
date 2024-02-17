@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 22:17:04 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/13 22:43:10 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/17 20:10:17 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_cmd
 }	t_cmd;
 
 void	*my_malloc(size_t size, int mode);
-char	**ft_split(char *s, char c);
+char	**ft_split(char *s, char *delim);
 char	*ft_strjoin(char *s1, char *s2);
 
 char	*ft_strdup(char *s1);
@@ -50,5 +50,6 @@ char	*my_strstr(char *str, char *to_find);
 void	vinaya(int argc, char *argv[], t_cmd *cmd);
 int		buddha(t_cmd *cmd);
 void	err(int *fd_in, int *fd_out);
+void	w_err(char *str);
 
 #endif

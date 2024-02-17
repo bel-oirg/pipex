@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 01:37:28 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/01/29 03:24:30 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:31:42 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	*my_malloc(size_t size, int mode)
 			return (lst_free(&head), exit(1), NULL);
 		node->data = data;
 		node->next = NULL;
-		(head) && (node->next = head);
+		if (head != NULL)
+			node->next = head;
 		head = node;
 		return (data);
 	}

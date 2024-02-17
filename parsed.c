@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:31 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/11 17:19:57 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/17 22:30:35 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ int	check_args(int argc, char *argv[])
 	int	index;
 
 	index = -1;
-	(argc < 5) && (perror(""), exit(0), 0);
+	(argc < 5) && (w_err("Err Args < 5"), exit(0), 0);
 	fd[1] = open(argv[argc - 1], O_WRONLY | O_CREAT, 0777);
-	(fd[1] < 0) && (perror(""), exit(1), 0);
+	(fd[1] < 0) && (perror("out_file "), exit(1), 0);
 	close(fd[1]);
 	if (!my_strcmp(argv[1], "here_doc"))
 	{
-		(argc > 6) && (perror(""), my_malloc(0, 0), 0);
+		(argc > 6) && (w_err("Err : Args > 6"), my_malloc(0, 0), 0);
 		return (1);
 	}
 	fd[0] = open(argv[1], O_RDONLY, 0777);
-	(fd[0] < 0) && (perror(""), exit(1), 0);
+	(fd[0] < 0) && (perror("in_file"), exit(1), 0);
 	close(fd[0]);
 	return (0);
 }
@@ -65,8 +65,8 @@ static char	*add_path(char **envp, char *cmd)
 		if (path)
 			break ;
 	}
-	(!path) && (perror(""), my_malloc(0, 0));
-	path_v = ft_split(path, ':');
+	(!path) && (w_err("PATH not found"), 0);
+	path_v = ft_split(path, ":");
 	index = -1;
 	while (path_v[++index])
 	{
@@ -105,7 +105,7 @@ void	get_cmds(int argc, char *argv[], char *envp[], t_cmd **cmd)
 	*cmd = head;
 	while (++index < argc - 1)
 	{
-		splited = ft_split(argv[index], ' ');
+		splited = ft_split(argv[index], " \t");
 		(*cmd)->flags = my_malloc(sizeof(char *) * (arr_len(splited) + 1), 1);
 		fill_cmds(splited, envp, cmd);
 		(index < argc - 2) && ((*cmd)->next = my_malloc(sizeof(t_cmd), 1));

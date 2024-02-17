@@ -6,7 +6,7 @@
 #    By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 02:32:08 by bel-oirg          #+#    #+#              #
-#    Updated: 2024/02/11 23:12:12 by bel-oirg         ###   ########.fr        #
+#    Updated: 2024/02/15 17:58:15 by bel-oirg         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ parsed_utils.c vinaya.c
 SRCS_B = $(SRCS) gnl.c gnl_utils.c vinaya_h.c
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 RM = rm -f
 
