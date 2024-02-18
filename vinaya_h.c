@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:54:03 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/17 22:14:27 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:34:27 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "pipex.h"
 
 static char	*random_f(void)
 {

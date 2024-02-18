@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:31 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/17 22:30:35 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/18 01:48:45 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,9 @@ static char	*add_path(char **envp, char *cmd)
 	if (is_it_in(cmd, '/'))
 		return (cmd);
 	index = -1;
-	while (envp[++index])
-	{
+	path = NULL;
+	while (envp[++index] && !path)
 		path = my_strstr(envp[index], "PATH=");
-		if (path)
-			break ;
-	}
 	(!path) && (w_err("PATH not found"), 0);
 	path_v = ft_split(path, ":");
 	index = -1;

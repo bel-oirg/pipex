@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 22:54:03 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/11 23:13:42 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:31:04 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "pipex.h"
 
 void	free_out(char *out_free)
 {

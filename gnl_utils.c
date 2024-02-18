@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:21:53 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/11 23:13:48 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:31:08 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "pipex.h"
 
 static int	ft_strl(char *s)
 {
