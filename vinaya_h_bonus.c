@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vinaya_h.c                                         :+:      :+:    :+:   */
+/*   vinaya_h_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:54:03 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/18 21:34:27 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:30:55 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 static char	*random_f(void)
 {
@@ -22,8 +22,7 @@ static char	*random_f(void)
 	file_len = 16;
 	file_name = my_malloc(file_len + 1, 1);
 	fd_rd = open("/dev/urandom", O_RDONLY, 0777);
-	if (fd_rd < 0)
-		return (perror("cannot open /dev/urandom"), random_f());
+	(fd_rd < 0) && (w_err("cannot open /dev/urandom"), 0);
 	read(fd_rd, file_name, file_len);
 	close(fd_rd);
 	file_name[file_len] = 0;

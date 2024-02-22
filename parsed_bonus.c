@@ -1,16 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsed.c                                           :+:      :+:    :+:   */
+/*   parsed_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:31 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/19 13:30:01 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:57:45 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
+
+int	my_strcmp(char *s1, char *s2)
+{
+	if (!*s2 && !s1)
+		return (0);
+	if (!s2 || !s1)
+		return (1);
+	while (*s1 == *s2 && *s1)
+	{
+		s1++;
+		s2++;
+	}
+	if (*s1 == '\n' && !*s2)
+		return (0);
+	return (*s1 - *s2);
+}
+
+int	check_args(int argc, char *argv[])
+{
+	int	fd[2];
+	int	index;
+
+	index = -1;
+	(argc < 5) && (w_err("Err Args < 5"), exit(0), 0);
+	fd[1] = open(argv[argc - 1], O_WRONLY | O_CREAT, 0777);
+	(fd[1] < 0) && (perror("out_file "), exit(1), 0);
+	close(fd[1]);
+	if (!my_strcmp(argv[1], "here_doc"))
+	{
+		(argc > 6) && (w_err("Err : Args > 6"), my_malloc(0, 0), 0);
+		return (1);
+	}
+	fd[0] = open(argv[1], O_RDONLY, 0777);
+	(fd[0] < 0) && (perror("in_file"), unlink(argv[argc - 1]), exit(1), 0);
+	close(fd[0]);
+	return (0);
+}
 
 static char	*add_path(char **envp, char *cmd)
 {

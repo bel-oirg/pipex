@@ -6,7 +6,7 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 22:06:51 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/18 02:21:29 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:58:44 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	c_args(int argc, char *argv[])
 	(fd[1] < 0) && (perror("out_file"), exit(1), 0);
 	close(fd[1]);
 	fd[0] = open(argv[1], O_RDONLY, 0777);
-	(fd[0] < 0) && (perror("in_file"), exit(1), 0);
+	(fd[0] < 0) && (perror("in_file"), unlink(argv[argc - 1]), exit(1), 0);
 	close(fd[0]);
 }
 

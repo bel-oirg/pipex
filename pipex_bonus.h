@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 00:49:58 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/19 17:32:09 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:30:59 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -42,6 +42,8 @@ char	*ft_strdup(char *s1);
 
 //parsed
 void	get_cmds(int argc, char *argv[], char *envp[], t_cmd **cmd);
+int		check_args(int argc, char *argv[]);
+int		my_strcmp(char *s1, char *s2);
 
 //parsed_utils
 int		is_it_in(char *str, char c);
@@ -54,5 +56,17 @@ void	vinaya(int argc, char *argv[], t_cmd *cmd);
 int		buddha(t_cmd *cmd);
 void	err(int *fd_in, int *fd_out);
 void	w_err(char *str);
+
+//vinaya_h
+void	vinaya_h(int argc, char *argv[], t_cmd *cmd);
+
+//next_line
+# define BUFFER_SIZE 65165
+
+void	free_out(char *out_free);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+int		have_n(char	*temp);
+char	*print_line(char **temp);
+char	*get_next_line(int fd);
 
 #endif

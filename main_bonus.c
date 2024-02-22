@@ -6,11 +6,11 @@
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 01:49:39 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/18 21:30:42 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:30:40 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {

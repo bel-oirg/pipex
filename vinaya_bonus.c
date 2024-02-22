@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vinaya.c                                           :+:      :+:    :+:   */
+/*   vinaya_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bel-oirg <bel-oirg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 14:54:32 by bel-oirg          #+#    #+#             */
-/*   Updated: 2024/02/22 09:54:40 by bel-oirg         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:00:40 by bel-oirg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 int	buddha(t_cmd *cmd)
 {
@@ -32,7 +32,7 @@ int	buddha(t_cmd *cmd)
 	{
 		close(fd[1]);
 		(dup2(fd[0], STDIN_FILENO) < 0) && (perror("dup2"), my_malloc(0, 0), 0);
-		close(fd[1]);
+		close(fd[0]);
 	}
 	return (0);
 }
@@ -65,7 +65,8 @@ void	vinaya(int argc, char *argv[], t_cmd *cmd)
 	if (dup2(fd_in, STDIN_FILENO) < 0)
 		(perror("dup2"), err(&fd_in, &fd_out), 0);
 	close(fd_in);
-	(buddha(cmd)) && (err(NULL, &fd_out), 0), cmd = cmd->next;
+	while (++index < argc - 1)
+		(buddha(cmd)) && (err(NULL, &fd_out), 0), cmd = cmd->next;
 	if (dup2(fd_out, STDOUT_FILENO) < 0)
 		(perror("dup2"), err(NULL, &fd_out), 0);
 	close(fd_out);
